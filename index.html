@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLOWCYII HOSTING</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://autoresbot.com/tmp_files/2839611d-5f1d-4045-82f4-fcc0b0d73964.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
+
+        header {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .banner-title {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            font-size: 2em;
+            text-align: center;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: transparent;
+            border-radius: 10px;
+        }
+
+        .category-bar {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .category-bar button {
+            padding: 10px 20px;
+            font-size: 0.9em;
+            color: white;
+            background-color: #ff9800;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .category-bar button:hover {
+            background-color: #e68a00;
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .search-bar input {
+            padding: 10px;
+            font-size: 0.9em;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .banner {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .banner img {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .product {
+            background-color: #333;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid white;
+        }
+
+        .product img {
+            max-width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .product h3 {
+            margin: 5px 0;
+            font-size: 1em;
+        }
+
+        .product p {
+            font-size: 0.9em;
+        }
+
+        .product button {
+            padding: 5px 10px;
+            font-size: 0.9em;
+            color: white;
+            background-color: #ff9800;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+            transition: transform 0.2s;
+        }
+
+        .product button:hover {
+            background-color: #e68a00;
+        }
+
+        .product button:active {
+            transform: scale(0.95);
+        }
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.8); /* Black w/ opacity */
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 400px;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .modal button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal button:hover {
+            background-color: #e68a00;
+        }
+
+        .form-label {
+            margin: 10px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="banner-title">𝐅𝐋𝐎𝐖𝐂𝐘𝐈𝐈 𝐇𝐎𝐒𝐓𝐈𝐍𝐆</div>
+    </header>
+
+    <div class="container">
+        <p style="text-align: center;">Menyediakan Kebutuhan Hosting Anda</p>
+        
+        <!-- Banner -->
+        <div class="banner">
+            <img src="https://pomf2.lain.la/f/dtfce4rz.jpg" alt="Promotional Banner">
+        </div>
+
+        <!-- Kategori Filter -->
+        <div class="category-bar">
+            <button onclick="filterProducts('All')">All</button>
+            <button onclick="filterProducts('Panel')">Panel</button>
+            <button onclick="filterProducts('Nokos')">Nokos</button>
+        </div>
+
+        <!-- Fitur Pencarian -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search products..." onkeyup="searchProducts()">
+        </div>
+
+        <!-- Daftar Produk -->
+        <div class="product-grid" id="productGrid">
+            <!-- Produk Panel -->
+            <div class="product" data-name="Panel 1GB" data-description="Layanan hosting panel 1GB dengan garansi kualitas." data-category="Panel">
+                <img src="https://pomf2.lain.la/f/l8jajtmk.jpg" alt="Panel 1GB">
+                <h3>Panel 1GB</h3>
+                <p>Layanan hosting panel 1GB dengan garansi kualitas.</p>
+                <p>Rp1.000</p>
+                <button onclick="buyNow('Panel 1GB')">Beli Sekarang</button>
+            </div>
+
+            <div class="product" data-name="Panel 2GB" data-description="Layanan hosting panel 2GB untuk kebutuhan yang lebih besar." data-category="Panel">
+                <img src="https://pomf2.lain.la/f/l8jajtmk.jpg" alt="Panel 2GB">
+                <h3>Panel 2GB</h3>
+                <p>Layanan hosting panel 2GB untuk kebutuhan yang lebih besar.</p>
+                <p>Rp2.000</p>
+                <button onclick="buyNow('Panel 2GB')">Beli Sekarang</button>
+            </div>
+
+            <div class="product" data-name="Panel 3GB" data-description="Hosting panel 3GB yang cocok untuk proyek skala menengah." data-category="Panel">
+                <img src="https://pomf2.lain.la/f/l8jajtmk.jpg" alt="Panel 3GB">
+                <h3>Panel 3GB</h3>
+                <p>Hosting panel 3GB yang cocok untuk proyek skala menengah.</p>
+                <p>Rp3.000</p>
+                <button onclick="buyNow('Panel 3GB')">Beli Sekarang</button>
+            </div>
+
+            <div class="product" data-name="Panel 4GB" data-description="Layanan hosting panel 4GB untuk kebutuhan bisnis kecil." data-category="Panel">
+                <img src="https://pomf2.lain.la/f/l8jajtmk.jpg" alt="Panel 4GB">
+                <h3>Panel 4GB</h3>
+                <p>Layanan hosting panel 4GB untuk kebutuhan bisnis kecil.</p>
+                <p>Rp4.000</p>
+                <button onclick="buyNow('Panel 4GB')">Beli Sekarang</button>
+            </div>
+
+            <div class="product" data-name="Panel 5GB" data-description="Hosting panel 5GB yang ideal untuk bisnis menengah." data-category="Panel">
+                <img src="https://pomf2.lain.la/f/l8jajtmk.jpg" alt="Panel 5GB">
+                <h3>Panel 5GB</h3>
+                <p>Hosting panel 5GB yang ideal untuk bisnis menengah.</p>
+                <p>Rp5.000</p>
+                <button onclick="buyNow('Panel 5GB')">Beli Sekarang</button>
+            </div>
+
+            <div class="product" data-name="Panel 6GB" data-description="Layanan hosting panel 6GB untuk kebutuhan proyek besar." data-category="Panel">
+                <img src="https://pomf2.lain.la/f/l8jajtmk.jpg" alt="Panel 6GB">
+                <h3>Panel 6GB</h3>
+                <p>Layanan hosting panel 6GB untuk kebutuhan proyek besar.</p>
+                <p>Rp6.000</p>
+                <button onclick="buyNow('Panel 6GB')">Beli Sekarang</button>
+            </div>
+
+            <div class="product" data-name="Panel 7GB" data-description="Hosting panel 7GB untuk kebutuhan jaringan besar." data-category="Panel">
+                <img src="https://pomf2.lain.la/f/l8jajtmk.jpg" alt="Panel 7GB">
+                <h3>Panel 7GB</h3>
+                <p>Hosting panel 7GB untuk kebutuhan jaringan besar.</p>
+                <p>Rp7.000</p>
+                <button onclick="buyNow('Panel 7GB')">Beli Sekarang</button>
+            </div>
+
+            <div class="product" data-name="Panel 8GB" data-description="Layanan hosting panel 8GB untuk performa optimal." data-category="Panel">
+                <img src="https://pomf2.lain.la/f/l8jajtmk.jpg" alt="Panel 8GB">
+                <h3>Panel 8GB</h3>
+                <p>Layanan hosting panel 8GB untuk performa optimal.</p>
+                <p>Rp8.000</p>
+                <button onclick="buyNow('Panel 8GB')">Beli Sekarang</button>
+            </div>
+
+            <!-- Panel Unli -->
+            <div class="product" data-name="Panel Unli" data-description="Hosting panel unlimited untuk kebutuhan yang tidak terbatas." data-category="Panel">
+                <img src="https://pomf2.lain.la/f/l8jajtmk.jpg" alt="Panel Unli">
+                <h3>Panel Unli</h3>
+                <p>Hosting panel unlimited untuk kebutuhan yang tidak terbatas.</p>
+                <p>Rp9.000</p>
+                <button onclick="buyNow('Panel Unli')">Beli Sekarang</button>
+            </div>
+
+            <!-- Produk Reseller Panel -->
+            <div class="product" data-name="Reseller Panel" data-description="Layanan Reseller Panel permanen untuk bisnis Anda." data-category="Panel">
+                <img src="https://pomf2.lain.la/f/l8jajtmk.jpg" alt="Reseller Panel">
+                <h3>Reseller Panel (Permanen)</h3>
+                <p>Layanan Reseller Panel permanen untuk bisnis Anda.</p>
+                <p>Rp10.000</p>
+                <button onclick="buyNow('Reseller Panel')">Beli Sekarang</button>
+            </div>
+
+            <!-- Produk Nokos -->
+            <div class="product" data-name="Nokos US" data-description="Nokos nomor Amerika " data-category="Nokos">
+                <img src="https://autoresbot.com/tmp_files/df885c71-a2ee-46eb-9c5c-b6e3eed658a5.jpg" alt="Nokos US">
+                <h3>Nokos US</h3>
+                <p>Nokos nomor Amerika </p>
+                <p>Rp28.000</p>
+                <button onclick="buyNow('Nokos US')">Beli Sekarang</button>
+            </div>
+
+            <div class="product" data-name="Nokos China" data-description="Nokos nomor China " data-category="Nokos">
+                <img src="https://autoresbot.com/tmp_files/df885c71-a2ee-46eb-9c5c-b6e3eed658a5.jpg" alt="Nokos China">
+                <h3>Nokos China</h3>
+                <p>Nokos nomor China </p>
+                <p>Rp16.000</p>
+                <button onclick="buyNow('Nokos China')">Beli Sekarang</button>
+            </div>
+
+            <div class="product" data-name="Nokos Rusia" data-description="Nokos nomor Rusia " data-category="Nokos">
+                <img src="https://autoresbot.com/tmp_files/df885c71-a2ee-46eb-9c5c-b6e3eed658a5.jpg" alt="Nokos Rusia">
+                <h3>Nokos Rusia</h3>
+                <p>Nokos nomor Rusia </p>
+                <p>Rp17.000</p>
+                <button onclick="buyNow('Nokos Rusia')">Beli Sekarang</button>
+            </div>
+
+            <div class="product" data-name="Nokos Indo" data-description="Nokos nomor Indonesia " data-category="Nokos">
+                <img src="https://autoresbot.com/tmp_files/df885c71-a2ee-46eb-9c5c-b6e3eed658a5.jpg" alt="Nokos Indo">
+                <h3>Nokos Indo</h3>
+                <p>Nokos nomor Indonesia </p>
+                <p>Rp8.000</p>
+                <button onclick="buyNow('Nokos Indo')">Beli Sekarang</button>
+            </div>
+
+            <div class="product" data-name="Nokos India" data-description="Nokos nomor India " data-category="Nokos">
+                <img src="https://autoresbot.com/tmp_files/df885c71-a2ee-46eb-9c5c-b6e3eed658a5.jpg" alt="Nokos India">
+                <h3>Nokos India</h3>
+                <p>Nokos nomor India </p>
+                <p>Rp19.000</p>
+                <button onclick="buyNow('Nokos India')">Beli Sekarang</button>
+            </div>
+
+            <div class="product" data-name="Nokos Malaysia" data-description="Nokos nomor Malaysia " data-category="Nokos">
+                <img src="https://autoresbot.com/tmp_files/df885c71-a2ee-46eb-9c5c-b6e3eed658a5.jpg" alt="Nokos Malaysia">
+                <h3>Nokos Malaysia</h3>
+                <p>Nokos nomor Malaysia </p>
+                <p>Rp14.000</p>
+                <button onclick="buyNow('Nokos Malaysia')">Beli Sekarang</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function filterProducts(category) {
+            let products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                if (category === 'All' || product.getAttribute('data-category') === category) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        function searchProducts() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let products = document.querySelectorAll('.product');
+            let hasResults = false;
+
+            products.forEach(product => {
+                let name = product.getAttribute('data-name').toLowerCase();
+                let description = product.getAttribute('data-description').toLowerCase();
+                
+                if (name.includes(input) || description.includes(input)) {
+                    product.style.display = 'block';
+                    hasResults = true;
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+
+            if (!hasResults) {
+                setTimeout(() => {
+                    filterProducts('All');
+                }, 2000);
+            }
+        }
+
+        function buyNow(productName) {
+            alert("Anda telah memilih produk: " + productName);
+        }
+    </script>
+</body>
+</html>
